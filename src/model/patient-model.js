@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import config from '../config/config.js';
 
 const PatientSchema = new mongoose.Schema(
     {
@@ -9,7 +10,6 @@ const PatientSchema = new mongoose.Schema(
         gender: { type: String, required: true },
         dateOfBirth: { type: Date, required: true},
         password: { type: String, required: true },
-        confirmPassword: { type: String, required: true},
     },
     {
         timestamps: true
@@ -31,7 +31,7 @@ PatientSchema.pre('save', async function (next) {
     }
     //add Random additonal date
     const salt = await bcrypt.genSalt(10);
-    const hash = bcrypt.hashSync(patient.password, salt);
+    const hash = bcrypt.hashSync(patient.password, config.salt.number);
     //Replace the password with hash
     patient.password = hash;
 
