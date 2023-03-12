@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-// import config from './config';
+import config from './config.js';
 import Logging from '../library/Logging.js';
 
 const dbConnection = async () => {
     await mongoose
-        .connect('mongodb://localhost:27017/doctor-patient-app')
+        .connect(config.mongo.url)
         .then(() => {
             Logging.info('Connected to Database....');
         })

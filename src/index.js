@@ -3,6 +3,7 @@ import dbConnection from './config/dbConnection.js';
 import bodyParser from 'body-parser';
 import Logging from './library/Logging.js';
 import routes from './routes/index.js';
+import config from './config/config.js';
 
 const app = express();
 
@@ -22,6 +23,6 @@ const startServer = () => {
     app.use('/api/v1', routes);
 
     app.listen(port, () => {
-        Logging.info(`Server is listening on port ${port}`);
+        Logging.info(`Server is listening on port ${config.server.port}`);
     });
 };
