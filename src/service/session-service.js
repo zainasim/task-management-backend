@@ -8,16 +8,14 @@ export async function createSession(userId, userAgent) {
     return session;
 }
 
-export function createAccessToken(user, session) {
+export function createAccessToken(user) {
     //build and return the new access token
     const payload = {
         user_id: user._id,
         user_name: user.name,
         user_email: user.email,
-        session: session._id
     };
     const accessToken = sign({ payload }, { expiresIn: config.token.accessTokenTtl });
-    console.log("accessToken =>", accessToken);
 
     return accessToken;
 }

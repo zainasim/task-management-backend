@@ -1,5 +1,5 @@
 // import { omit } from 'lodash';
-import { create } from '../service/patient-service.js';
+import { create, getById } from '../service/patient-service.js';
 import { validatePassword } from '../service/patient-service.js';
 import { createSession, createAccessToken } from '../service/session-service.js';
 import { sign } from '../utils/jwt-utils.js';
@@ -24,24 +24,33 @@ export async function patientLogIn(req, res) {
     }
 
     //create session
-    const session = await createSession(patient._id, req.get('user-agent') || '');
+    // const session = await createSession(patient._id, req.get('user-agent') || '');
 
     // //create Access Token
-    const accessToken = createAccessToken(patient,session);
+    const accessToken = createAccessToken(patient);
 
     // console.log(accessToken);
 
     //Refresh Token
-    const sessionObj = {
-        _id: session._id,
-        userId: session.user,
-        valid: session.valid,
-        userAgent: session.userAgent,
-        email: patient.email
-    };
-    const refreshToken = sign(sessionObj, {
-        expiresIn: config.token.refreashTokenTtl
-    });
+    // const sessionObj = {
+    //     _id: session._id,
+    //     userId: session.user,
+    //     valid: session.valid,
+    //     userAgent: session.userAgent,
+    //     email: patient.email
+    // };
+    // const refreshToken = sign(sessionObj, {
+    //     expiresIn: config.token.refreashTokenTtl
+    // });
 
-    return res.send({ accessToken, refreshToken });
+    return res.send({ accessToken });
+}
+
+export async function getPatientById(req, res) {
+    try {
+        const patient = await getById(req.params.id);
+        return res.send(patient);
+    } catch (error) {
+        return res.status(409).send(error.message);
+    }
 }

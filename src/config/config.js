@@ -19,7 +19,7 @@ const config = {
         url: MONGO_URL
     },
     token: {
-        accessTokenTtl: '15m',
+        accessTokenTtl: '1m',
         refreashTokenTtl: '1y'
     },
     key: {

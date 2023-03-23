@@ -30,8 +30,8 @@ PatientSchema.pre('save', async function (next) {
         return next();
     }
     //add Random additonal date
-    const salt = await bcrypt.genSalt(10);
-    const hash = bcrypt.hashSync(patient.password, config.salt.number);
+    const salt = await bcrypt.genSalt(config.salt.number);
+    const hash = bcrypt.hashSync(patient.password, salt);
     //Replace the password with hash
     patient.password = hash;
 
