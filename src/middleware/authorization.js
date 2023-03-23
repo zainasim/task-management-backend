@@ -9,10 +9,11 @@ export async function authorizeUser(req, res, next) {
 
         const decodedToken = jwt.decode(token);
 
-        if (decodedToken.payload.user_id === req.body.userID || decodedToken.payload.user_id === req.body.likedBy || decodedToken.payload.user_email === req.body.email) {
-            return next();
+        if (decodedToken.payload.user_id !== req.params.id) {
+            return res.status(401).json({ message: 'Invalid User' });
         }
-        return res.status(401).json({ message: 'Invalid User' });
+        console.log("zain asim");
+        next();
     } catch (error) {
         res.status(422).json({ error });
     }

@@ -1,7 +1,6 @@
-import { date, object, string, ref } from 'yup';
-import mongoose from 'mongoose';
+import { object, string, ref } from 'yup';
 
-export const createPatientSchema = object({
+export const createAdminSchema = object({
     body: object({
         password: string()
             .required('password is required')
@@ -9,23 +8,13 @@ export const createPatientSchema = object({
             .matches(/^[a-zA-z0-9_.-]*$/, 'Password can only contain Latin characters'),
         confirmPassword: string().oneOf([ref('password')], 'Password did not match'),
         email: string().email('Must be valid email').required('Email is rquired'),
-        firstName: string().required('First Name is required'),
-        lastName: string().required('Last Name is required'),
-        gender: string().required('Gender is required'),
-        dateOfBirth: date().required('Date of Birth is required'),
     })
 });
 
-export const loginPatientSchema = object({
+export const loginAdminSchema = object({
     body: object({
         email: string().email('Must be valid email').required('Email is rquired'),
         password: string()
             .required('password is required'),
-    })
-});
-
-export const getById = object({
-    params: object({
-        id: mongoose.Types.ObjectId,
     })
 });
