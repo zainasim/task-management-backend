@@ -10,6 +10,17 @@ export const createDoctorSchema = object({
     })
 });
 
+export const doctorTimingSchema = object({
+    body: object({
+        timing: object().shape({
+            timeSlot: string().required('time slot is required'),
+            value: string().required('value is required'),
+        })
+    })
+});
+
+
+
 // export const getById = object({
 //     params: object({
 //         id: mongoose.Types.ObjectId,

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import patientRoute from './patient-routes.js';
 import adminRoute from './admin-routes.js';
+import doctorRoute from './doctor-routes.js'
 
 const router = Router();
 
@@ -12,6 +13,10 @@ const defaultRoutes = [
     {
         path: '/admin',
         route: adminRoute
+    },
+    {
+        path: '/doctor',
+        route: doctorRoute
     }
 ];
 
