@@ -1,5 +1,4 @@
 import Admin from "../model/admin-model.js";
-import Doctor from "../model/doctor-model.js";
 
 export async function create(input) {
     try {
@@ -23,14 +22,6 @@ export async function validatePassword({ email, password }) {
         }
 
         return admin;
-    } catch (error) {
-        throw new Error(error.message);
-    }
-}
-
-export async function createDoctor(input) {
-    try {
-        return await Doctor.create(input);
     } catch (error) {
         throw new Error(error.message);
     }
