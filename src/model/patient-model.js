@@ -1,11 +1,15 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import config from '../config/config.js';
 
 const PatientSchema = new mongoose.Schema(
     {
         email: { type: String, required: true, unique: true },
-        name: { type: String, required: true },
-        password: { type: String, required: true }
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
+        gender: { type: String, required: true },
+        dateOfBirth: { type: Date, required: true},
+        password: { type: String, required: true },
     },
     {
         timestamps: true
@@ -26,7 +30,7 @@ PatientSchema.pre('save', async function (next) {
         return next();
     }
     //add Random additonal date
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(config.salt.number);
     const hash = bcrypt.hashSync(patient.password, salt);
     //Replace the password with hash
     patient.password = hash;
