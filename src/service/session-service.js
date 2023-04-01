@@ -10,7 +10,6 @@ export async function createSession(userId, userAgent) {
 
 export function createAccessToken(user, session) {
     //build and return the new access token
-    console.log(session);
     const payload = {
         user_id: user._id,
         user_name: user.name,
