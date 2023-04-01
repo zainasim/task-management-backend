@@ -1,4 +1,4 @@
-import { createDoctor, updateDoctorTimeSlot, getDoctorById, getAllDoctor } from "../service/doctor-service.js";
+import { createDoctor, updateDoctorTimeSlot, getDoctorById, getAllDoctor, getDoctorByType } from "../service/doctor-service.js";
 
 export async function createDoctorHandler(req, res) {
     try {
@@ -31,6 +31,15 @@ export async function getAllDoctorHandler(req, res) {
     try {
         const doctors = await getAllDoctor();
         return res.send(doctors);
+    } catch (error) {
+        return res.status(409).send(error.message);
+    }
+}
+
+export async function getDoctorByTypeHandler(req, res) {
+    try {
+        const doctor = await getDoctorByType(req.body.type);
+        return res.send(doctor);
     } catch (error) {
         return res.status(409).send(error.message);
     }
