@@ -6,7 +6,6 @@ export const createPatientSchema = object({
         password: string()
             .required('password is required')
             .min(6, 'Password is too short - Should be min 6 characters')
-            .matches(/^[a-zA-z0-9_.-]*$/, 'Password can only contain Latin characters'),
         confirmPassword: string().oneOf([ref('password')], 'Password did not match'),
         email: string().email('Must be valid email').required('Email is rquired'),
         firstName: string().required('First Name is required'),
