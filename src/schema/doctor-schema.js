@@ -23,8 +23,12 @@ export const doctorTimingSchema = object({
 
 
 
-export const getByType = object({
-    body: object({
-        type: string().required('Doctor Type is required is rquired')
-    })
+// export const getByType = object({
+//     body: object({
+//         type: string().required('Doctor Type is required is rquired')
+//     })
+// });
+
+export const getByType = object().shape({
+    type: string().required(),
 });

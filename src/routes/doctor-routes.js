@@ -14,6 +14,6 @@ router.get('/getById/:id', getDoctorByIdHandler);
 
 router.get('/getAll', getAllDoctorHandler);
 
-router.get('/getByType/', validateRequest(getByType), getDoctorByTypeHandler);
+router.get('/getByType/', getDoctorByTypeHandler);
 
 export default router;
