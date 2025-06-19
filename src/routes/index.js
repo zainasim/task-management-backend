@@ -1,27 +1,20 @@
-import { Router } from 'express';
-import patientRoute from './patient-routes.js';
-import adminRoute from './admin-routes.js';
-import doctorRoute from './doctor-routes.js'
+import express from 'express';
+import userRoutes from './user-routes.js';
+import taskRoutes from './task-routes.js';
 
-const router = Router();
+const router = express.Router();
 
-const defaultRoutes = [
-    {
-        path: '/patient',
-        route: patientRoute
-    },
-    {
-        path: '/admin',
-        route: adminRoute
-    },
-    {
-        path: '/doctor',
-        route: doctorRoute
-    }
-];
-
-defaultRoutes.forEach((route) => {
-    router.use(route.path, route.route);
+// Health check endpoint
+router.get('/health', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Task Management API is running',
+        timestamp: new Date().toISOString()
+    });
 });
+
+// API routes
+router.use('/users', userRoutes);
+router.use('/tasks', taskRoutes);
 
 export default router;
